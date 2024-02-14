@@ -1,0 +1,510 @@
+@font-face {
+    font-family: 'Anton';
+    src: url(police/Anton-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'Russo';
+    src: url(police/RussoOne-Regular.ttf);
+}
+
+@font-face {
+    font-family : 'Gros';
+    src: url(police/BlackOpsOne-Regular.ttf);
+}
+
+
+html{
+  margin:0;
+  padding:0;
+}
+
+
+h1{
+    font-family: 'Gros', sans-serif;
+
+    text-align: center;
+    color:white;
+
+
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black;
+
+
+}
+
+
+.serv{
+
+  background-image: url("img/background6.png");
+  background-size: cover;
+  border-left:0.5vh solid black;
+  border-right:0.5vh solid black;
+}
+
+
+
+.co, .adminstyle, .employestyle, .conta, .av, .ok{
+  background-image: url("img/background4.jpg");
+  background-size: cover;
+  border:0.5vh solid black;
+  text-align: center;
+}
+
+
+.vtur{
+  background-image: url("img/background4.jpg");
+  background-size: cover;
+  border:0.5vh solid black;
+}
+
+
+.ok{
+  text-align: center;
+}
+
+
+#avis, #titre {
+  background-image: url("img/background4.jpg");
+  background-size: cover;
+  border:0.5vh solid black;
+
+}
+
+
+h2{
+    font-family: 'Gros', sans-serif;
+    color:red;
+
+    text-align: center;
+
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black;
+}
+
+
+
+.hor{
+  background-image: url("img/background3.jpg");
+  background-size: cover;
+  border-bottom:0.5vh solid black;
+  border-left:0.5vh solid black;
+  border-right:0.5vh solid black;
+}
+
+
+input{  border-radius: 10px;  
+}
+
+
+button{ border-radius: 10px;
+        color:black;}
+
+
+
+input.forcont{
+  width:30vh;
+}
+
+
+#nomcontact, #prénomcontact, #emailcontact, #phonecontact, #titrecontact, #commentairecontact {
+text-align: center;
+}
+
+
+
+input.forcontbout{
+
+  width:15vh;
+}
+
+
+#submitcont{
+  text-align:center;
+}
+
+
+textarea.forcont{
+  width:45vh;
+  height:15vh;
+  resize:none;
+}
+
+
+p.index, p.formvoit, p.fcont, p.com, h3, p.pok{
+
+  font-family: 'Anton', sans-serif;
+  color:antiquewhite;
+
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: black;
+  text-align: center;
+
+}
+
+
+p.galerie{
+
+  font-family: 'Anton', sans-serif;
+  color:antiquewhite;
+
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: black;
+  text-align: start;
+
+}
+
+p.formtur, p.tur{
+
+  font-family: 'Anton', sans-serif;
+  color:antiquewhite;
+
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: black;
+
+  text-align: left;
+
+}
+
+
+
+
+#nomcontact, #prénomcontact, #emailcontact, #phonecontact, #titrecontact, #commentairecontact{
+
+            margin-bottom:2vh;}
+
+              
+.scont{
+                margin-left: 5vh;
+                margin-bottom:2vh;}
+
+
+
+
+
+input[type=submit]:hover{text-decoration: underline;}
+
+/* Modifie la couleur de fond des range sliders pour firefox */
+input[type=range]::-moz-range-progress {
+  background: black; 
+}
+
+
+/* Modifie la couleur de fond des range sliders pour chrome */
+input[type=range]::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, black, #ddd); 
+}
+
+
+/* Modifie la couleur des curseurs pour chrome, puis pour firefox */
+input[type=range]::-webkit-slider-thumb {
+
+  background: antiquewhite;
+  -webkit-appearance: none;}
+
+  input[type=range]::-moz-range-thumb {
+    background: antiquewhite; 
+  }
+
+
+
+  .voiture {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.left {
+    max-width: 50%;
+    height:auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.left img:first-child {
+    max-width: 50%;
+    height:auto;
+    margin-bottom: 20px;
+    display:flex;
+    flex-wrap:wrap;
+  
+}
+
+
+
+.right {
+    width: 50%;
+}
+
+.bottom {
+    width: 100%;
+    display:inline;
+}
+
+#flexpetit{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+
+}
+
+.petitesimg{
+ 
+  justify-content: center;
+  gap:1vh;
+
+
+
+}
+
+
+
+
+.aa{
+  width:30vh;
+}
+
+.cc{
+  width:55vh;
+}
+
+
+
+
+#messagess{
+  resize:none;
+  width:40vh;
+  height:10vh;
+
+
+}
+
+input.bb{
+
+  margin-top: 8vh;
+  margin-left:3vh;
+  width:20vh;
+  font-family: 'Anton', sans-serif;
+  color:black;
+}
+
+#ligne1{
+  display:flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+  gap:3vh;
+
+}
+
+#ligne2{
+  display:flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+  gap:3vh;
+}
+
+input.dd{
+
+  margin-left:3vh;
+  width:20vh;
+  font-family: 'Anton', sans-serif;
+  color:black;
+}
+
+
+input.ddg{
+
+  margin-left:3vh;
+  width:40vh;
+  font-family: 'Anton', sans-serif;
+  color:black;
+}
+
+
+
+
+
+.areaemploye{
+
+  width:45vh;
+  height:15vh;
+  resize:none;
+  align-self: center;
+  vertical-align: center;
+}
+
+
+#filtrage {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(3, auto);
+
+}
+
+.formvoit {
+  grid-column: span 3;
+}
+
+
+.filtr{
+    position:inherit;
+    border: 0.5vh solid black;
+    border-radius:0vh;
+    background-color: black;
+
+}
+
+.pair{
+  margin:1vh;
+}
+
+.uno{
+  margin:1vh;
+
+}
+
+
+
+
+
+input[type=range]{
+  width:15vh;
+}
+
+
+.accordeon {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  transition: 0.4s;
+}
+
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: black;
+  overflow: hidden;
+}
+
+
+.cach2{
+  display:none;
+}
+
+
+
+
+
+
+
+
+
+@media screen and (min-width:700px){
+
+
+  .cc{
+    width:60vh;
+  }
+  
+
+  
+  .formvoit {
+    grid-column: span 3; 
+}
+
+
+  .filtr{
+      position:inherit;
+      border: 0.5vh solid black;
+      border-radius:0vh;
+      background-color: black;
+  
+  }
+
+  .pair{
+    margin:1vh;
+  }
+
+
+  .cach2{
+    display:block;
+  }
+
+  .accordion{display:none;}
+
+  .panel{display:block;}
+
+
+  #filtrage {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
+    
+}
+
+
+
+
+} 
+
+
+
+
+
+
+@media screen and (min-width: 1551px){
+
+
+  .filtr{
+      position: fixed;
+      right: 5vh;
+      top: 3vh;
+      border: 0.5vh solid black;
+      border-radius:2vh;
+
+  
+      background-color: black;
+      width:31vh;
+      text-align: center;
+  
+  }
+
+  .panel{
+    width:30vh;
+  }
+  
+  
+  #filtrage {
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    grid-template-rows: repeat(3, auto);
+    text-align: center;
+
+
+    
+}
+
+  .accordeon{
+  visibility:hidden;
+  display:none;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
