@@ -1,17 +1,15 @@
 <?php
-//On démarre une session pour pouvoir bloquer les utilisateurs non connectés sur la page d'arrivée par la suite
- session_start();
+session_start();
+ob_start(); // Active la mise en tampon de sortie
+
 // /////////////////////////////////////////////////// VERIFICATION SI LE USER/PASS ENTRE EST BON ET REDIRECTION SI ADMIN OU AUTRE
 //On crée notre BDD, Table, et utilisateur admin
 //
 $non="";
 try {
     //on se connecte à mysql
-    $pdo = new PDO('mysql:host=localhost;', 'root', '');
-    //on crée la base de donnée si elle n'est pas déja existante
-    $pdo->exec("CREATE DATABASE IF NOT EXISTS garage");
-    //on lui dit qu'on veut utiliser cette base de données
-    $pdo->exec("USE garage");
+    require_once("pdo.php");
+    
     //on crée la table users dans laquelle il sera renseigné les username et MDP
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS users (
@@ -47,12 +45,13 @@ if ($result[0] == 0) {
     $statement->execute();
 }
 
+
 // ///////////////////////////////////////////////////////////VERIFICATION LOGIN ET MOT DE PASSE ET BLOCAGE 
 //
 
 
 //On met ca pour éviter qu'il m'affiche une erreur avec $_POST['login'] et $_POST['pass']
-if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST['Envoyer'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //On stocke dans des variables ce qu'à tapper quelqu'un dans le formulaire en protégeant contre l'(injection avec htmlentities)
         $login = htmlentities($_POST['login']);
         $pass = htmlentities($_POST['pass']);
@@ -78,10 +77,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST['Envoyer'])) {
                     //Si le login est admin, on va à la page admin.php
                     if ($login == "admin"){
                     echo 'Bienvenue ' . $login;
-                    header('Location: admin.php');}
+header('Location: admin.php');}
                     //Sinon on va à la page employe.php
                     else{ echo 'Bienvenue ' . $login;
-                        header('Location: employe.php'); }
+header('Location: employe.php'); }
                     exit();
                 } 
                 //Sinon, le mot de passe ne correspond pas 
@@ -92,19 +91,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST['Envoyer'])) {
         } 
         //ca n'a pas marché pour une raison inconnue
         else {
-            echo 'Impossible de récupérer l utilisateur';
+            $non=1;
         }
 
 }
-
+ob_end_flush(); // Envoie le contenu du tampon de sortie et désactive la mise en tampon de sortie
 ?>
-
 <!DOCTYPE html>
 <!-- /////////////////////////////////////////////On lie cet html au fichier css, affiche le logo dans l'onglet et importe l'en tete -->
+<head>
 <title>Garage V.Parrot</title>
-<link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/png" href="img/logo.png"/>
-
+<link rel="stylesheet" href="../style/style.css">
+<link rel="icon" type="image/png" href="../img/logo.png"/>
+<meta charset="UTF-8">
+</head>
 
 <html>
     
@@ -130,9 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST['Envoyer'])) {
 
           
             
-            <div class="c100" id="submit">
-                <input type="submit" class="dd" value="Envoyer" name="Envoyer">
-               
+                <input type="submit" class="dd" value="Envoyer">
 
         </form>
 
@@ -144,13 +142,11 @@ if ($non==1){
 
 ?>
 
-
 <br><br>
-</div></div>
+</div>
 
 
-
-<footer><?php require_once "horaires.php"?></footer>
-           
+<?php require_once "horaires.php"?>
+<?php require_once "footer.php"?>
     </body>
 </html>

@@ -9,11 +9,10 @@
 
 try{
     // on crée une nouvelle instance de pdo
-$pdo = new PDO('mysql:host=localhost;', 'root', '');
-// on crée la BDD garage si elle n'existe pas et on l'utilise
-$pdo->exec("CREATE DATABASE IF NOT EXISTS garage");
+    require_once("pdo.php");
 
-$pdo->exec("USE garage");
+
+
 // on crée la table Messagess
 $pdo->exec("
         CREATE TABLE IF NOT EXISTS Messagess (

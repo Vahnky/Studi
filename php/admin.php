@@ -16,50 +16,82 @@ else
 }
 
 ?>
-
-
 <!DOCTYPE html>
 
-<link rel="stylesheet" href="style.css">
-
-
-
-
+<link rel="stylesheet" href="../style/style.css">
 <!-- //////////////////////////IMPORT DE L EN TETE -->
 
 <header><?php require_once "navbar.php"?></header>
 
 <div class="adminstyle">
 
-<!--/////////////////////////////////////////////FORMULAIRE NOUVEL UTILISATEUR -->
-<br>
-<h2>Ajouter un utilisateur en renseignant créant son login et son mot de passe :</h2>
-<br>
 
-<form action="" method="post">
+
+<h2 id="AMS">Sélectionnez une action sur un utilisateur</h2>
+
+<form action="admin.php" id="clientForm" method="post">
+
+    <label>Choisissez :</label>
+    <input type="radio" id="creer" name="action" value="creer">
+    <label for="creer">Créer</label>
+
+    <input type="radio" id="modifier" name="action" value="modifier">
+    <label for="modifier">Modifier</label>
+
+    <input type="radio" id="supprimer" name="action" value="supprimer">
+    <label for="supprimer">Supprimer</label>
+
+    <br>
             
-                <br>
-                <label for=""><p class='fcont'>Login d'un nouvel employé : </p></label>
+                <label for=""><p class='fcont'>Login : </p></label>
                 <input type="text" id="login" name="login">
 
 
                 <br>
-                <label for="password"><p class='fcont'>Mot de passe du nouvel employé :</p></label>
-                <input type="password" id="password" name="password">
+                <div id="password">
+                <label for="password" class="password"><p class='fcont'>Mot de passe :</p></label>
+                <input type="password" class="password"  name="password"></div>
 
           
             
-            <div class="c100" id="submit">
             <br>
-                <input type="submit" class="ddg" name="ajout" value="Ajouter nouvel employé">
+                <input type="submit" class="ddg" id="boutton" name="ajout" value="Sélectionnez une action">
+</form>
 
-        </form>
 
-
-<br>
 
 <hr>
 <br>
+
+
+
+
+<script>
+    const creerRadio = document.getElementById("creer");
+    const modifierRadio = document.getElementById("modifier");
+    const supprimerRadio = document.getElementById("supprimer");
+    const h2Element = document.getElementById("AMS");
+
+    creerRadio.addEventListener("change", () => {
+        h2Element.textContent = "Créer un utilisateur en renseignant son login et son mot de passe :";
+        document.getElementById("password").style.display="inline";
+        document.getElementById("boutton").value = "Créer un nouvel utilisateur";
+    });
+
+    modifierRadio.addEventListener("change", () => {
+        h2Element.textContent = "Modifier un utilisateur en renseignant son login et en tappant le nouveau mot de passe";
+        document.getElementById("password").style.display="inline";
+        document.getElementById("boutton").value = "Modifier cet utilisateur";
+    });
+
+    supprimerRadio.addEventListener("change", () => {
+        h2Element.textContent = "Supprimer un utilisateur en renseignant son login";
+        document.getElementById("password").style.display="none";
+        document.getElementById("boutton").value = "Supprimer cet utilisateur";
+    });
+</script>
+
+
 
 
 
@@ -70,10 +102,7 @@ else
 // 
 try {
 
-    //on crée une nouvelle instance de pdo
-    $pdo = new PDO('mysql:host=localhost;dbname=garage', 'root', '');
-    //on signifie qu'on utilise la BDD garage
-    $pdo->exec("USE garage");
+    require_once("pdo.php");
   
     
     //Si erreur
@@ -81,14 +110,17 @@ try {
     die($e->getMessage());
 }
 
+if(isset($_POST["action"])){$action = $_POST["action"];}
+if (isset($_POST['login'])){$login = htmlentities($_POST['login']);}
+if (isset($_POST['password'])){$password = htmlentities($_POST['password']);}
+
     //on utilise cela pour éviter les erreurs de array undefinied que ca m'a fait
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout']) && isset($_POST["action"]) && $action === "creer") {
 
     //on stocke les valeurs entrées pour les nouveaux utilisateurs et leur mot de passe dans des variables
 
 
-    if (isset($_POST['login'])){$login = htmlentities($_POST['login']);}
-    if (isset($_POST['password'])){$password = htmlentities($_POST['password']);}
+
 
      // Vérification des conditions du mot de passe : 12 caracs, 1 maj, 1 chiffre, 1 carac spécial, merci grafikart
      if (strlen($password) < 12 ||
@@ -114,40 +146,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout'])) {
     $statement->execute();
 }}
 
-?>
-
-
-<!-- ////////////////////////////////////////////////FORMULAIRE POUR POUVOIR CHANGER DE MOT DE PASSE -->
-
-<h2>Changer le mot de passe en renseignant le login et le nouveau mot de passe :</h2>
-<br>
-<form action="" method="post" id="supprcompte">
-
-<label for=""><p class='fcont'>Login d'un employé </p></label>
-                <input type="text" id="login" name="login"><br>
 
 
 
-                <label for="password"><p class='fcont'> Changer mot de passe</p></label>
-                <input type="password" id="newpassword" name="newpassword">
 
-          
-            
-            <div class="c100" id="submit">
-                <input type="submit" class="ddg" name="modif" value="Modifier le Mot de Passe">
+//////////////////////////////////////////////UPDATE LA TABLE POUR CHANGER LE MOT DE PASSE -->
 
-</form>
 
-<br>
-<hr>
-<br>
-
-<!-- //////////////////////////////////////////////UPDATE LA TABLE POUR CHANGER LE MOT DE PASSE -->
-
-<?php 
 
 // Si la méthode est POST et que l'on a bien cliqué sur l'input modif
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['modif'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout']) && isset($_POST["action"]) && $action === "modifier") {
     // On récupère le login et le nouveau mot de passe si ils existent
     if(isset($_POST['login'])){$login = htmlentities($_POST['login']);}
     if(isset($_POST['newpassword'])){$newPassword = htmlentities($_POST['newpassword']);}
@@ -177,40 +185,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['modif'])) {
     $statement->execute();
 }}
 
-?>
 
 
-<!-- //////////////////////////////////////////////FORMULAIRE POUR SUPPRIMER UN UTILISATEUR -->
 
-<br>
-<h2>Supprimer un utilisateur en renseignant son login :</h2>
-<br>
 
-<form action="" method="post">
-    <label for=""><p class='fcont'><p class="fcont">Login de l'utilisateur à supprimer : </p></label>
-    <input type="text" id="login" name="login"><br>
 
-    <div class="c100" id="submit">
-    <br>
-        <input type="submit" class="ddg" name="supprimer" value="Supprimer utilisateur">
-</form>
+//////////////////////////////////////////PHP POUR SUPPRESSION -->
 
-<br>
-<hr>
-<br>
 
-<!-- ////////////////////////////////////////////PHP POUR LE FORMULAIRE DE SUPPRESSION -->
-<?php
-try {
-    // on crée une nouvelle instance de pdo
-    $pdo = new PDO('mysql:host=localhost;dbname=garage', 'root', '');
-    $pdo->exec("USE garage");
-} catch (PDOException $e) {
-    die($e->getMessage());
-}
 
 // si la méthode est post et qu'on a bien cliqué sur l'input supprimer
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['supprimer'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout']) && isset($_POST["action"]) && $action === "supprimer") {
+    require_once("pdo.php");
     // on stocke le champs de login dans une variable si il est set
     if (isset($_POST['login'])){$login = htmlentities($_POST['login']);}
 
@@ -226,49 +212,79 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['supprimer'])) {
 
 
 <!--/////////////////////////////////////////////////////////////////////// FORMULAIRES POUR SERVICE qu'on traite sur index.php -->
-<h2>Changer les services proposés :</h2>
-<br>
-<!-- PREMIER SERVICE -->
-<form indeax="serv" action="index.php" method="post">
-    <label for=""><p class='fcont'>Changer le premier service    :</p></label>
-    <input type="text" id="service1" name="service1" /> 
 
 
+<h2 id="AMS2">Sélectionnez une action sur un service</h2>
 
-<br><br>
+<form action="../index.php" id="clientForm" method="post" enctype="multipart/form-data">
 
-<!-- SECOND SERVICE -->
+    <label>Choisissez :</label>
+    <input type="radio" id="creerserv" name="action" value="creer">
+    <label for="creer">Créer</label>
 
-    <label for=""><p class='fcont'>Changer le second service    :</p></label>
-    <input type="text" id="service2" name="service2">
-    
+    <input type="radio" id="modifierserv" name="action" value="modifier">
+    <label for="modifier">Modifier</label>
 
+    <input type="radio" id="supprimerserv" name="action" value="supprimer">
+    <label for="supprimer">Supprimer</label>
 
-<br><br>
-
-<!-- TROISIEME -->
-
-    <label for=""><p class='fcont'>Changer le troisième service  :</p></label>
-    <input type="text" id="service3" name="service3">
-    
-<br><br>
-
-<!-- QUATRIEME -->
-
-    <label for=""><p class='fcont'>Changer le quatrième service :</p></label>
-    <input type="text" id="service4" name="service4">
-    
-
-<br><br>
-
-<!-- CINQUIEME -->
-
-    <label for=""><p class='fcont'>Changer le cinquième service :</p></label>
-    <input type="text" id="service5" name="service5">
-    <div class="c100" id="submit">
     <br>
-    <input type="submit" class="ddg" name="servi" value="Valider les nouveaux services">
+            
+                <label for="service"><p class='fcont'>Titre du service :</p></label>
+                <input type="text" id="service" name="titreservice" /> <br>
+
+
+                <div id="descrservice">
+                <label for="descrservice"><p class='fcont'>Descriptif du service :</p></label>
+                <input type="text" name="descrservice"></div><br>
+                
+                <div id="image">
+                <label for="image"><p class='fcont'>Image du service :</p></label>
+                <input type="file" name="imageserv" > </div><br>
+
+          
+            
+            <br>
+                <input type="submit" id="boutton2" class="ddg" name="servi" value="Sélectionnez une action">
 </form>
+
+
+
+<hr>
+<br>
+
+
+
+
+<script>
+    const creerRadio2 = document.getElementById("creerserv");
+    const modifierRadio2 = document.getElementById("modifierserv");
+    const supprimerRadio2 = document.getElementById("supprimerserv");
+    const h2Element2 = document.getElementById("AMS2");
+
+    creerRadio2.addEventListener("change", () => {
+        h2Element2.textContent = "Créer un nouveau service :";
+        document.getElementById("descrservice").style.display="inline";
+        document.getElementById("image").style.display="inline";
+        document.getElementById("boutton2").value = "Créer un nouveau service";
+    });
+
+    modifierRadio2.addEventListener("change", () => {
+        h2Element2.textContent = "Modifier un service en renseignant son titre";
+        document.getElementById("descrservice").style.display="inline";
+        document.getElementById("image").style.display="inline";
+        document.getElementById("boutton2").value = "Modifier ce service";
+    });
+
+    supprimerRadio2.addEventListener("change", () => {
+        h2Element2.textContent = "Supprimer un service en renseignant son titre";
+        document.getElementById("descrservice").style.display="none";
+        document.getElementById("image").style.display="none";
+        document.getElementById("boutton2").value = "Supprimer ce service";
+    });
+</script>
+
+
 
 <!-- /////////////////////////////////////////////////IMPORT DE LA FONCTION PERMETTANT DE RESTER SUR LA PAGE ET NE PAS ALLER SUR L ACTION DU FORMULAIRE -->
 
@@ -353,7 +369,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['supprimer'])) {
 
 
 
-
 <!-- ////////////////////////////SUPPRIMER UN MESSAGE -->
 
 <!-- ///////////////////////FORMULAIRE pour supprimer un message-->
@@ -377,13 +392,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['supprimer'])) {
 <?php
 
 // ///////////////////////////////On crée une nouvelle instance de pdo avec le dbname garage
-$pdo = new PDO('mysql:host=localhost;dbname=garage', 'root', '');
+
 
 $idmessa="";
 
 // si la method est post et qu'on a cliqué sur l'input supprmess
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['supprmess'])) {
+
+    require_once("pdo.php");
 
     // si le champ d'id est renseigné, alors on le stocke dans une variable
     if(isset($_POST["idmessa"])){$idmessa = $_POST["idmessa"];}
@@ -407,6 +424,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['supprmess'])) {
 }
 ?>
 
+
+
 <!-- /////////////////////////////////////////////////////AFFICHAGE DES MESSAGES RECUS -->
 <h2>Liste des messages :</h2>
 <br>
@@ -416,7 +435,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['supprmess'])) {
 
             <?php
 
-$pdo = new PDO('mysql:host=localhost;dbname=garage', 'root', '');
+
 
 try {
     // On prépare la requète pour obtenir les valeurs rangées triés par id
@@ -449,6 +468,8 @@ try {
 <br>
 <hr>
 <br>
+
+
 
 </div>
     

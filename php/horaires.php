@@ -10,13 +10,7 @@
 <!--////////////////////////////////  PDO HEURES D OUVERTURE QUI VIENNENT DES FORMULAIRES D ADMIN.PHP -->
     <?php
 try{
-    //on se connecte à mysql
-    $pdo = new PDO('mysql:host=localhost;', 'root', '');
-
-    //on crée une base de donnée si elle n'est pas déja existante
-    $pdo->exec("CREATE DATABASE IF NOT EXISTS garage");
-    //on lui dit qu'on veut utiliser cette base de données
-    $pdo->exec("USE garage");
+    require_once("pdo.php");
     //on crée la table dans laquelle on enregistrera les heures voulues
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS heures (

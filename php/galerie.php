@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
 <?php
 
 // On  crée une connexion à la base de données
-$pdo = new PDO('mysql:host=localhost;dbname=garage', 'root', '');
+require_once("pdo.php");
 
 // On récupère la valeur de l’ID de la voiture à partir des paramètres GET de l’URL
 $id_voiture = $_GET['id'];

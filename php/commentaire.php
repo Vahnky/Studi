@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 
 <!-- //////////////////////Icone d'onglet -->
-<link rel="icon" type="image/png" href="img/logo.png"/>
+<link rel="icon" type="image/png" href="../img/logo.png"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../style/style.css">
 
 <!-- //////////////////////Import de l'en tete -->
 <header><?php require_once "navbar.php"?></header>
+
+
 
 <!-- ///////////////////////////FORMULAIRE CONTACT AVEC NOM COMMENTAIRE ET NOTE -->
 
 <div class="av">
 
 <h2>Donnez-nous votre avis :</h2>
+
 
 <form method="post" id ="comments" action="commentlogic.php">
 
@@ -69,4 +74,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-<footer><?php require_once "horaires.php"?></footer>
+<?php require_once "horaires.php"?>
+<?php require_once "footer.php"?>

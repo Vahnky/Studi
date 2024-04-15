@@ -1,5 +1,4 @@
 <?php
-//On vérifie si le $_SESSION[login] existe, il se trouve après la vérification longin MDP dans connexion.php et si non on est redirigé vers connexion.php
  session_start();
 if (!isset($_SESSION['login'])) {
     header('Location: connexion.php');
@@ -7,13 +6,10 @@ if (!isset($_SESSION['login'])) {
 }
 
 ?>
-
 <!DOCTYPE html>
-
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../style/style.css">
 
 <?php require_once("navbar.php")?>
-
 
 <?php
 require_once("commentlogic.php")?>
@@ -27,7 +23,7 @@ require_once("commentlogic.php")?>
 <br>
             <?php
 
-$pdo = new PDO('mysql:host=localhost;dbname=garage', 'root', '');
+require_once("pdo.php");
 
 try {
     // On prépare la requète pour obtenir les valeurs rangées triés par id
@@ -137,12 +133,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validcomment'])) {
 
 try{
     //on se connecte à mysql
-    $pdo = new PDO('mysql:host=localhost;', 'root', '');
 
-    //on crée une base de donnée si elle n'est pas déja existante
-    $pdo->exec("CREATE DATABASE IF NOT EXISTS garage");
-    //on lui dit qu'on veut utiliser cette base de données
-    $pdo->exec("USE garage");
+
+    
+
     //on crée la table dans laquelle on enregistrera les informations voulus. L'image est VARCHAR car on enregistre seulement le chemin du fichier
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS Voitures (
@@ -176,17 +170,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout'])) {
     if (isset($_FILES['image_principale'])) {
         // On récup le nom du fichier et on le stocke dans une variable
         $image_principale = $_FILES['image_principale']['name'];
-
-        // On récup la taille du fichier
-        $image_size = $_FILES['image_principale']['size'];
-       
-        // Si la taille est plus grande que 2 Mo on exit
-
-        if ($image_size > 2 * 1024 * 1024) {
-            echo "<p class='fcont'>Le fichier est trop volumineux. La taille doit être inférieure à 2 Mo.</p>";
-            exit;
-        }
-
         // On récupère le type mime du fichier et on le stocke dans $image_type
         $image_type = $_FILES['image_principale']['type'];
 
@@ -212,16 +195,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout'])) {
         // On parcourt chaque fichier du tableau
         foreach ($galerie_images['name'] as $index => $name) {
 
-            // On récup leur taille respective
-            $image_size = $galerie_images['size'][$index]; 
-
-            // Si la taille est supérieur à 2 Mo
-
-            if ($image_size > 2 * 1024 * 1024) {
-                echo "<p class='fcont'>Le fichier est trop volumineux. La taille doit être inférieure à 2 Mo.</p>";
-                exit;
-            }
-
             // On récupère leur type respectif
             $image_type = $galerie_images['type'][$index];
 
@@ -232,7 +205,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout'])) {
             }
             
             // On met le chemin de destination des images
-            $target = "img/" . basename($name);
+            $target = "../img/" . basename($name);
             // On déplace les fichiers vers cet endroit
             move_uploaded_file($galerie_images['tmp_name'][$index], $target);
 
@@ -243,7 +216,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout'])) {
 
 
     // On implode le tableau qu'on vient de créer, séparé par des virgules, et on stocke le résultat dans la variable
-    $galerie_images = implode(",", $imagesNames);
+$galerie_images = implode(",", $imagesNames);
 
     // On prépare la requete pour insérer les valeurs dans la table
     $statement = $pdo->prepare("INSERT INTO Voitures (marque, prix, annee, kilometrage, caracteristiques, equipements, image_principale, galerie_images) VALUES (:marque, :prix, :annee, :kilometrage, :caracteristiques, :equipements, :image_principale, :galerie_images)");
@@ -279,7 +252,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout'])) {
 <?php
 
 
-    $pdo = new PDO('mysql:host=localhost;dbname=garage', 'root', '');
+require_once("pdo.php");
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['supr'])) {
     if (isset($_POST['id'])) {$id = htmlentities($_POST['id']);}
