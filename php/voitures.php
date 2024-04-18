@@ -25,7 +25,7 @@ require_once("pdo.php");
 
 // max prix
 
-$stmt = $pdo->prepare("SELECT MAX(prix) AS maxprix FROM voitures");
+$stmt = $pdo->prepare("SELECT MAX(prix) AS maxprix FROM Voitures");
 $stmt->execute();
 
 
@@ -33,21 +33,21 @@ $maxprix = $stmt->fetch(PDO::FETCH_ASSOC)['maxprix'];
 
 // max kilometrage
 
-$stmt = $pdo->prepare("SELECT MAX(kilometrage) AS maxkilometrage FROM voitures");
+$stmt = $pdo->prepare("SELECT MAX(kilometrage) AS maxkilometrage FROM Voitures");
 $stmt->execute();
 
 $maxkilometrage = $stmt->fetch(PDO::FETCH_ASSOC)['maxkilometrage'];
 
 // min année
 
-$stmt = $pdo->prepare("SELECT MIN(annee) AS minannee FROM voitures");
+$stmt = $pdo->prepare("SELECT MIN(annee) AS minannee FROM Voitures");
 $stmt->execute();
 
 $minannee = $stmt->fetch(PDO::FETCH_ASSOC)['minannee'];
 
 
 // max année
-$stmt = $pdo->prepare("SELECT MAX(annee) AS maxannee FROM voitures");
+$stmt = $pdo->prepare("SELECT MAX(annee) AS maxannee FROM Voitures");
 $stmt->execute();
 
 $maxannee = $stmt->fetch(PDO::FETCH_ASSOC)['maxannee'];
