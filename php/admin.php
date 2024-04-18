@@ -111,11 +111,13 @@ try {
 }
 
 if(isset($_POST["action"])){$action = $_POST["action"];}
-if (isset($_POST['login'])){$login = htmlentities($_POST['login']);}
-if (isset($_POST['password'])){$password = htmlentities($_POST['password']);}
+
 
     //on utilise cela pour éviter les erreurs de array undefinied que ca m'a fait
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout']) && isset($_POST["action"]) && $action === "creer") {
+
+    if (isset($_POST['login'])){$login = htmlentities($_POST['login']);}
+if (isset($_POST['password'])){$password = htmlentities($_POST['password']);}
 
     //on stocke les valeurs entrées pour les nouveaux utilisateurs et leur mot de passe dans des variables
 
@@ -155,17 +157,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout']) && isset($_PO
 
 
 // Si la méthode est POST et que l'on a bien cliqué sur l'input modif
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout']) && isset($_POST["action"]) && $action === "modifier") {
+else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout']) && isset($_POST["action"]) && $action === "modifier") {
     // On récupère le login et le nouveau mot de passe si ils existent
     if(isset($_POST['login'])){$login = htmlentities($_POST['login']);}
-    if(isset($_POST['newpassword'])){$newPassword = htmlentities($_POST['newpassword']);}
+    if(isset($_POST['password'])){$password = htmlentities($_POST['password']);}
 
     // Vérification des conditions du mot de passe : 12 caracs, 1 maj, 1 chiffre, 1 carac spécial
-    if (strlen($newPassword) < 12 ||
-    !preg_match('/[A-Z]/', $newPassword) ||
-    !preg_match('/[a-z]/', $newPassword) ||
-    !preg_match('/[0-9]/', $newPassword) ||
-    !preg_match('/[^A-Za-z0-9]/', $newPassword)) {
+    if (strlen($password) < 12 ||
+    !preg_match('/[A-Z]/', $password) ||
+    !preg_match('/[a-z]/', $password) ||
+    !preg_match('/[0-9]/', $password) ||
+    !preg_match('/[^A-Za-z0-9]/', $password)) {
 
     echo "<p class='fcont'>La modification a échoué. Le mot de passe doit contenir au moins 12 caractères, dont au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial.</p>";}
 
@@ -179,7 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout']) && isset($_PO
 
     // On associe les valeurs aux paramètres
     $statement->bindValue(':username', $login);
-    $statement->bindValue(':password', password_hash($newPassword, PASSWORD_BCRYPT));
+    $statement->bindValue(':password', password_hash($password, PASSWORD_BCRYPT));
 
     // On exécute la requête
     $statement->execute();
