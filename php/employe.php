@@ -182,7 +182,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout'])) {
 
         //Si le type est bon, on définit le chemin de destination pour enregistrer le fichier dans le dossier img/.
 
-        $target = "img/" . basename($image_principale);
+        $target = "../img/" . basename($image_principale);
 
         // On déplace le fichier vers le chemin qu'on vient de créer
         move_uploaded_file($_FILES['image_principale']['tmp_name'], $target);
