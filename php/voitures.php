@@ -25,32 +25,32 @@ require_once("pdo.php");
 
 // max prix
 
-$stmt = $pdo->prepare("SELECT MAX(prix) AS maxprix FROM Voitures");
-$stmt->execute();
+$stmtmaxprix = $pdo->prepare("SELECT MAX(prix*1) AS maxprix FROM Voitures");
+$stmtmaxprix->execute();
 
 
-$maxprix = $stmt->fetch(PDO::FETCH_ASSOC)['maxprix'];
+$maxprix = ($stmtmaxprix->fetch(PDO::FETCH_ASSOC)['maxprix'])*1;
 
 // max kilometrage
 
-$stmt = $pdo->prepare("SELECT MAX(kilometrage) AS maxkilometrage FROM Voitures");
-$stmt->execute();
+$stmtmaxkm = $pdo->prepare("SELECT MAX(kilometrage*1) AS maxkilometrage FROM Voitures");
+$stmtmaxkm->execute();
 
-$maxkilometrage = $stmt->fetch(PDO::FETCH_ASSOC)['maxkilometrage'];
+$maxkilometrage = ($stmtmaxkm->fetch(PDO::FETCH_ASSOC)['maxkilometrage'])*1;
 
 // min année
 
-$stmt = $pdo->prepare("SELECT MIN(annee) AS minannee FROM Voitures");
-$stmt->execute();
+$stmtminannee = $pdo->prepare("SELECT MIN(annee*1) AS minannee FROM Voitures");
+$stmtminannee->execute();
 
-$minannee = $stmt->fetch(PDO::FETCH_ASSOC)['minannee'];
+$minannee = ($stmtminannee->fetch(PDO::FETCH_ASSOC)['minannee'])*1;
 
 
 // max année
-$stmt = $pdo->prepare("SELECT MAX(annee) AS maxannee FROM Voitures");
-$stmt->execute();
+$stmtmaxannee = $pdo->prepare("SELECT MAX(annee*1) AS maxannee FROM Voitures");
+$stmtmaxannee->execute();
 
-$maxannee = $stmt->fetch(PDO::FETCH_ASSOC)['maxannee'];
+$maxannee = ($stmtmaxannee->fetch(PDO::FETCH_ASSOC)['maxannee'])*1;
 
 ?>
 
@@ -77,16 +77,16 @@ $maxannee = $stmt->fetch(PDO::FETCH_ASSOC)['maxannee'];
 
 <div class="formvoit">
     <p>Prix minimum :</p>
-    <input type="number" id="min-prix" name="min-prix" min="0" max="<?php echo htmlspecialchars($maxprix); ?>" step="100">
+    <input type="number" id="min-prix" name="min-prix" min="0" max="<?php echo $maxprix; ?>" step="100">
 </div>
 <div class="formvoit">
     <p>Prix maximum :</p>
-    <input type="number" id="max-prix" name="max-prix" min="0" max="<?php echo htmlspecialchars($maxprix); ?>" step="100">
+    <input type="number" id="max-prix" name="max-prix" min="0" max="<?php echo $maxprix; ?>" step="100">
 </div>
 </div>
 <div class="uno">
-    <input type="range" id="min-prix-range" name="min-prix-range" min="0" max="<?php echo htmlspecialchars($maxprix); ?>" step="100">
-    <input type="range" id="max-prix-range" name="max-prix-range" min="0" max="<?php echo htmlspecialchars($maxprix); ?>" step="100">
+    <input type="range" id="min-prix-range" name="min-prix-range" min="0" max="<?php echo $maxprix; ?>" step="100">
+    <input type="range" id="max-prix-range" name="max-prix-range" min="0" max="<?php echo $maxprix; ?>" step="100">
 </div>
 
 </div>
