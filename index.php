@@ -67,11 +67,14 @@ try{
     die($e->getMessage());
 }
 
+if(isset($_POST["action"])){$action = $_POST["action"];}
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['servi'])) {
+if(isset($_POST['titreservice'])){$serviceTitle = $_POST['titreservice'];}
+if(isset($_POST['descrservice'])){$serviceText = $_POST['descrservice'];}
 
-    if(isset($_POST['titreservice'])){$serviceTitle = $_POST['titreservice'];}
-    if(isset($_POST['descrservice'])){$serviceText = $_POST['descrservice'];}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['servi']) && isset($_POST["action"]) && $action === "creer") {
+
     if (isset($_FILES['imageserv'])) {
         // On récup le nom du fichier et on le stocke dans une variable
         $imageserv = $_FILES['imageserv']['name'];
@@ -107,6 +110,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['servi'])) {
 
 }
 
+
+else if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['servi']) && isset($_POST["action"]) && $action === "modifier"){
+
+    if (isset($_FILES['imageserv'])) {
+        // On récup le nom du fichier et on le stocke dans une variable
+        $imageserv = $_FILES['imageserv']['name'];
+        // On récupère le type mime du fichier et on le stocke dans $image_type
+        $image_type = $_FILES['imageserv']['type'];
+    
+        // Vérification du type MIME : si il n'est pas du type jpeg, jpg, png
+        if (!in_array($image_type, ['image/jpeg', 'image/jpg', 'image/png'])) {
+            echo "<p class='fcont'>L'upload n'a pas fonctionné. Les fichiers doivent être de type jpg, jpeg ou png.</p>";
+    
+            exit;
+        }
+    
+        //Si le type est bon, on définit le chemin de destination pour enregistrer le fichier dans le dossier img/.
+    
+        $target = "img/" . basename($imageserv);
+    
+        // On déplace le fichier vers le chemin qu'on vient de créer
+        move_uploaded_file($_FILES['imageserv']['tmp_name'], $target);
+    }
+
+   // Préparer la requête SQL pour la mise à jour
+   $sql = "UPDATE services SET descr = :descr, imageserv = :imageserv WHERE title = :title";
+   $stmt = $pdo->prepare($sql);
+
+   // Lier les paramètres
+   $stmt->bindParam(':title', $serviceTitle);
+   $stmt->bindParam(':descr', $serviceText);
+   $stmt->bindParam(':imageserv', $imageserv);
+
+   // Exécuter la requête
+   $stmt->execute();
+}
+
+else if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['servi']) && isset($_POST["action"]) && $action === "supprimer"){
+
+    $sql = "DELETE FROM services WHERE title = :title";
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->bindParam(':title', $serviceTitle);
+
+    $stmt->execute();
+}
 
 
 
