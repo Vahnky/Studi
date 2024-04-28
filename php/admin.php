@@ -1,6 +1,4 @@
 <?php
-//On vérifie : si le $_SESSION[login] n'existe pas, on est redirigé vers connexion.php, il se trouve après la vérification login MDP dans connexion.php,
-// ET si le $_SESSION[login] existe mais qu'il est différend de admin, alors on est redirigé sur employe.php
  session_start();
 if (!isset($_SESSION['login'])) {
     header('Location: connexion.php');
