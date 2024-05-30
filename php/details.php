@@ -47,7 +47,7 @@ if (isset($_GET['id'])) {
 
             echo "<div class='carousel-item $activeClass'>";
 
-            echo "<img class='d-block w-100' src='../img/$voitureImage' alt='Image de la voiture'>";
+            echo "<img class='d-block w-100' src='img/$voitureImage' alt='Image de la voiture'>";
 
             echo "</div>";
         }
