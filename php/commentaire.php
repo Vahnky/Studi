@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 
-<!-- //////////////////////Icone d'onglet -->
-<link rel="icon" type="image/png" href="../img/logo.png"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../style/style.css">
+
+
 
 <!-- //////////////////////Import de l'en tete -->
 <header><?php require_once "navbar.php"?></header>
@@ -17,7 +15,7 @@
 <h2>Donnez-nous votre avis :</h2>
 
 
-<form method="post" id ="comments" action="commentlogic.php">
+<form method="post" id ="comments" action="php/commentlogic.php">
 
                 <label for=""><p class="com">Votre nom : </p></label>
                 <input type="text" id="nom" name="nom" required><br>
@@ -62,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- ////////////////////////////////UTILISATION DE LA FONCTION -->
 
-<script>redirect('comments','ok.php');</script>
+<script>redirect('comments','ok');</script>
 
 
 
