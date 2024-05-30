@@ -1,14 +1,14 @@
 <?php
  session_start();
 if (!isset($_SESSION['login'])) {
-    header('Location: connexion.php');
+    header('Location: connexion');
     exit();
 }
 else
 {
     if($_SESSION['login'] != "admin")
     {
-        header('Location: employe.php');
+        header('Location: employe');
         exit();
     }
 }
@@ -16,8 +16,7 @@ else
 ?>
 <!DOCTYPE html>
 
-<link rel="stylesheet" href="../style/style.css">
-<!-- //////////////////////////IMPORT DE L EN TETE -->
+
 
 <header><?php require_once "navbar.php"?></header>
 
@@ -27,7 +26,7 @@ else
 
 <h2 id="AMS">Sélectionnez une action sur un utilisateur</h2>
 
-<form action="admin.php" id="clientForm" method="post">
+<form action="admin" id="clientForm" method="post">
 
     <label>Choisissez :</label>
     <input type="radio" id="creer" name="action" value="creer">
@@ -216,7 +215,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout']) && isset($_PO
 
 <h2 id="AMS2">Sélectionnez une action sur un service</h2>
 
-<form action="../index.php" id="clientForm" method="post" enctype="multipart/form-data">
+<form action="home" id="clientForm" method="post" enctype="multipart/form-data">
 
     <label>Choisissez :</label>
     <input type="radio" id="creerserv" name="action" value="creer">
@@ -292,7 +291,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout']) && isset($_PO
 
 
 <!-- On utilise la fonction redirect de ce qu'on vient d'importer-->
-<script>redirect('serv','admin.php');</script>
+<script>redirect('serv','admin');</script>
 
 <br>
 <hr>
@@ -309,7 +308,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout']) && isset($_PO
 
         <!-- Formulaire Lundi -->
 
-        <form id="l" action="horaires.php" method="post">
+        <form id="l" action="php/horaires.php" method="post">
         <label for=""><p class='fcont'>Heures d'ouverture du Lundi : </p></label>
         <input type="text" id="lundi" name="lundi">
         <br><br>
@@ -359,7 +358,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout']) && isset($_PO
 <br>
 
 <!-- On utilise la fonction redirect ajax pour bloquer l'ouverture de la nouvelle page par l'action du formulaire et qu'on aille sur admin.php = reste sur la meme page -->
-<script>redirect('l','admin.php');</script>
+<script>redirect('l','admin');</script>
 
 
 
@@ -375,7 +374,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout']) && isset($_PO
 <h2>Supprimer un message avec son id</h2>
 <br>
 
-<form method="post" id ="mes" action="admin.php">
+<form method="post" id ="mes" action="admin">
     <div id="idmessagesuppr"><p class='fcont'>ID du message : </p>
     <input type="number" id="idmessa" name="idmessa" required></div><br>
 
