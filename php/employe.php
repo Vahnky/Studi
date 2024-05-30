@@ -1,13 +1,13 @@
 <?php
  session_start();
 if (!isset($_SESSION['login'])) {
-    header('Location: connexion.php');
+    header('Location: connexion');
     exit();
 }
 
 ?>
 <!DOCTYPE html>
-<link rel="stylesheet" href="../style/style.css">
+
 
 <?php require_once("navbar.php")?>
 
@@ -60,7 +60,7 @@ try {
 <h2>Approuver ou non le commentaire :</h2>
 <br>
 
-<form method="post" id ="comments" action="employe.php">
+<form method="post" id ="comments" action="employe">
     <label for=""><p class='fcont'>ID du commentaire : </p></label>
     <input type="number" id="id" name="id" required>
 
@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validcomment'])) {
     // On exécute la requête
     try {
         if(isset($sql)){$pdo->exec($sql);}
-        header("Refresh:0");
+
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
@@ -108,11 +108,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validcomment'])) {
 <h2>Ajouter une voiture à la vente :</h2>
 <br>
 
-<form action="employe.php" id='ajout' method="post" enctype="multipart/form-data">
+<form action="employe" id='ajout' method="post" enctype="multipart/form-data">
 <p class='fcont'>Marque : </p><input type="text" name="marque"><br>
-<p class='fcont'>Prix : </p><input type="text" name="prix" required><br>
-<p class='fcont'>Année de mise en circulation : </p><input type="text" name="annee" required><br>
-<p class='fcont'>Kilométrage : </p><input type="text" name="kilometrage" required><br>
+<p class='fcont'>Prix : </p><input type="number" name="prix" required><br>
+<p class='fcont'>Année de mise en circulation : </p><input type="number" name="annee" required><br>
+<p class='fcont'>Kilométrage : </p><input type="number" name="kilometrage" required><br>
 <p class='fcont'>Caractéristiques : </p><textarea class="areaemploye" name="caracteristiques"></textarea><br>
 <p class='fcont'>Équipements et options : </p><textarea class="areaemploye" name="equipements"></textarea><br>
 <p class='fcont'>Image principale : </p><input type="file" class="ddg" name="image_principale" required><br>
@@ -182,7 +182,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout'])) {
 
         //Si le type est bon, on définit le chemin de destination pour enregistrer le fichier dans le dossier img/.
 
-        $target = "../img/" . basename($image_principale);
+        $target = "img/" . basename($image_principale);
 
         // On déplace le fichier vers le chemin qu'on vient de créer
         move_uploaded_file($_FILES['image_principale']['tmp_name'], $target);
@@ -205,7 +205,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout'])) {
             }
             
             // On met le chemin de destination des images
-            $target = "../img/" . basename($name);
+            $target = "img/" . basename($name);
             // On déplace les fichiers vers cet endroit
             move_uploaded_file($galerie_images['tmp_name'][$index], $target);
 
