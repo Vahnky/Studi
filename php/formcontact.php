@@ -1,18 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/style.css">
-    <link rel="icon" type="image/png" href="img/logo.png"/>
-</head>
-<body>
-    
-</body>
-</html>
-
 
 <?php require_once "navbar.php"?>
+
+<body>
+    
+
+
+
+
+
 
 <div class="conta">
 
@@ -23,7 +19,7 @@
 
 
 
-<form action="contactlogic.php" method="post" id="formcont">
+<form action="php/contactlogic.php" method="post" id="formcont">
 
 
 
@@ -57,14 +53,14 @@
 
 <br><br>
 </div>
-
+</body>
 <!-- ///////////////////////////////IMPORT DE LA FONCTION POUR REDIRIGER SUR UNE PAGE AUTRE QUE L ACTION DU FORMULAIRE -->
 
 <?php require_once "bloc.php";?>
 
 <!-- ////////////////////////////////UTILISATION DE LA FONCTION -->
 
-<script>redirect('formcont','okmess.php');</script>
+<script>redirect('formcont','okmess');</script>
 
 <?php require_once "horaires.php"?>
 <?php require_once "footer.php"?>
