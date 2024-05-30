@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<link rel="stylesheet" href="../style/style.css">
+<link rel="stylesheet" href="style/style.css">
 
 
 <body>
@@ -10,4 +10,4 @@
 </body>
 
 
-<form action='../index.php'><input type="submit" class="ddg" value="Retour à la page principale"></form>
+<form action='home'><input type="submit" class="ddg" value="Retour à la page principale"></form>
