@@ -5,10 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-   <meta http-equiv="Content-Security-Policy-Report-Only" content="default-src 'self' https://stackpath.bootstrapcdn.com https://code.jquery.com https://cdnjs.cloudflare.com https://ajax.googleapis.com; img-src 'self'">
 
+  <meta http-equiv="Content-Security-Policy-Report-Only" 
+  content="default-src 'self' https://stackpath.bootstrapcdn.com https://code.jquery.com https://cdnjs.cloudflare.com https://ajax.googleapis.com; 
+  img-src 'self'">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
   <link rel="icon" type="image/png" href="img/logo.png"/>
+
+  <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
 
@@ -32,24 +40,24 @@ $current_page = basename($_SERVER['PHP_SELF']);
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
 
-    <li class="nav-item <?php if ($current_page == 'index.php') echo 'active'; ?>">
-    <a class="nav-link" href=<?php if ($current_page == 'index.php') {echo '"index.php"';} else {echo '"../index.php"';}?>>Accueil</a>
+    <li class="nav-item <?php if ($current_page == 'home') echo 'active'; ?>">
+    <a class="nav-link" href=<?php if ($current_page == 'home') {echo '"home"';} else {echo '"home"';}?>>Accueil</a>
 </li>
 
-<li class="nav-item <?php if ($current_page == 'connexion.php') echo 'active'; ?>">
-    <a class="nav-link" href=<?php if ($current_page == 'index.php') {echo '"php/connexion.php"';} else {echo '"connexion.php"';}?>>Se connecter</a>
+<li class="nav-item <?php if ($current_page == 'connexion') echo 'active'; ?>">
+    <a class="nav-link" href=<?php if ($current_page == 'connexion') {echo '"connexion"';} else {echo '"connexion"';}?>>Se connecter</a>
 </li>
 
-<li class="nav-item <?php if ($current_page == 'voitures.php') echo 'active'; ?>">
-    <a class="nav-link" href=<?php if ($current_page == 'index.php') {echo '"php/voitures.php"';} else {echo '"voitures.php"';}?>>Voitures en vente</a>
+<li class="nav-item <?php if ($current_page == 'voitures') echo 'active'; ?>">
+    <a class="nav-link" href=<?php if ($current_page == 'index.php') {echo '"voitures"';} else {echo '"voitures"';}?>>Voitures en vente</a>
 </li>
 
-<li class="nav-item <?php if ($current_page == 'formcontact.php') echo 'active'; ?>">
-    <a class="nav-link" href=<?php if ($current_page == 'index.php') {echo '"php/formcontact.php"';} else {echo '"formcontact.php"';}?>>Nous contacter</a>
+<li class="nav-item <?php if ($current_page == 'formcontact') echo 'active'; ?>">
+    <a class="nav-link" href=<?php if ($current_page == 'index.php') {echo '"formcontact"';} else {echo '"formcontact"';}?>>Nous contacter</a>
 </li>
 
-<li class="nav-item <?php if ($current_page == 'commentaire.php') echo 'active'; ?>">
-    <a class="nav-link" href=<?php if ($current_page == 'index.php') {echo '"php/commentaire.php"';} else {echo '"commentaire.php"';}?>>Laisser un avis</a>
+<li class="nav-item <?php if ($current_page == 'commentaire') echo 'active'; ?>">
+    <a class="nav-link" href=<?php if ($current_page == 'index.php') {echo '"commentaire"';} else {echo '"commentaire"';}?>>Laisser un avis</a>
 </li>
 
 
