@@ -35,6 +35,9 @@ function redirect(formid, redirectUrl) {
                 data: $(this).serialize(), // On récupère les données du formulaire
                 success: function() {
                     window.location.href = redirectUrl; // On redirige vers la nouvelle URL
+                },
+                error: function() {
+                    window.location.href = error.php;
                 }
             });
         });
@@ -42,3 +45,12 @@ function redirect(formid, redirectUrl) {
 }
 
 </script>
+
+
+
+
+
+
+
+
+
