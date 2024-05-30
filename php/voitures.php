@@ -321,7 +321,7 @@ if (count($resultverif) > 0) {
     foreach ($voitures as $voiture) {
         echo'<div class="voiturees">';
         echo'<div class="card" style="width: 18rem;">';
-        echo '<img src="../img/' . $voiture["image_principale"] . '" class="card-img-top" alt="Photo de la voiture">';
+        echo '<img src="img/' . $voiture["image_principale"] . '" class="card-img-top" alt="Photo de la voiture">';
         echo'<div class="card-body">';
         echo '<h5 class="card-title">' . $voiture["marque"] . '</h5>';
         echo '<p class="card-text">Prix : <span class=\'prix\'>' . $voiture['prix'] . '</span>,<br>
@@ -330,7 +330,7 @@ if (count($resultverif) > 0) {
         ID : ' . $voiture['id'] .
         '</p>';
   
-        echo '<div id="details"> <a href="details.php?id=' . $voiture['id'] . '" class="btn btn-primary">Détails</a></div>';
+        echo '<div id="details"> <a href="detailvoitures' . $voiture['id'] . '" class="btn btn-primary">Détails</a></div>';
         echo'</div>';
         echo'</div>';
         echo'</div>';
