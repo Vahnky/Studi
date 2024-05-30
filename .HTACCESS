@@ -1,0 +1,12 @@
+RewriteEngine On
+
+RewriteRule ^home?$ index.php 
+RewriteRule ^admin?$ php/admin.php 
+RewriteRule ^commentaire?$ php/commentaire.php 
+RewriteRule ^connexion?$ php/connexion.php 
+RewriteRule ^employe?$ php/employe.php 
+RewriteRule ^formcontact?$ php/formcontact.php 
+RewriteRule ^voitures?$ php/voitures.php 
+RewriteRule ^ok?$ php/ok.php 
+RewriteRule ^okmess?$ php/okmess.php 
+RewriteRule ^detailvoitures?([0-9]+)$ php/details.php?id=$1 
