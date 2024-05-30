@@ -77,10 +77,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     //Si le login est admin, on va à la page admin.php
                     if ($login == "admin"){
                     echo 'Bienvenue ' . $login;
-header('Location: admin.php');}
+header('Location: admin');}
                     //Sinon on va à la page employe.php
                     else{ echo 'Bienvenue ' . $login;
-header('Location: employe.php'); }
+header('Location: employe'); }
                     exit();
                 } 
                 //Sinon, le mot de passe ne correspond pas 
@@ -101,7 +101,7 @@ ob_end_flush(); // Envoie le contenu du tampon de sortie et désactive la mise e
 <!-- /////////////////////////////////////////////On lie cet html au fichier css, affiche le logo dans l'onglet et importe l'en tete -->
 <head>
 <title>Garage V.Parrot</title>
-<link rel="stylesheet" href="../style/style.css">
+
 <link rel="icon" type="image/png" href="../img/logo.png"/>
 <meta charset="UTF-8">
 </head>
@@ -117,10 +117,10 @@ ob_end_flush(); // Envoie le contenu du tampon de sortie et désactive la mise e
 
 <!--/////////////////////////////////// FORMULAIRE POUR SE CONNECTER EN TANT QUE EMPLOYE OU ADMINISTRATEUR -->
 
-        <form method="post" action="connexion.php">
+        <form method="post" action="connexion">
             
 
-                <label for=""><p class="index">Nom d'utilisateur : </p></label>
+                <label for="nom d'utilisateur"><p class="index">Nom d'utilisateur : </p></label>
                 <input type="text" id="login" name="login" required><br>
 
 
